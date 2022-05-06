@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="./jquery-ui.css">
+  <script src="./jquery.js"></script>
+  <script src="./jquery-ui.js"></script>
+  <script src="./bootstrap.min.js"></script>
+  <link rel="stylesheet" href="./bootstrap.min.css"/>
+  <link rel="stylesheet" href="./fontawesome.css"  />
+  
+  <meta name="viewport" 
+        content="width=device-width, 
+        initial-scale=1.0, 
+        user-scalable=no" />
+  <title>Form Builder</title>
+  <style>
+    #draggable { width: 150px; height: 150px; padding: 0.5em; }
+	.myDisplay {
+		display:inline !important;
+		padding:10px !important;
+		border:none !important;	
+		cursor:grab;
+	}
+  </style>
+</head>
+
+<body>
+<h2 style="margin-left:25px">Boostrap Form Mockup</h2>
+<button style="margin-top:-35px;float:right" onclick="hideSection()" id="hideButton" class="btn btn-primary" style="float:right">Hide Create Section</button>
+<hr/>
+
+<div class="row">
+	<div class="col-md-9"></div>
+	
+	<div class="col-md-3" id="buttonSection">
+		<div class="buttons" style="border:2px dashed black;padding:15px">
+			<button id="createButtonElement" class="btn btn-primary">Create Button</button>
+			<button id="createButtonElementWithIcon" class="btn btn-primary">Create Button with Icon</button>
+			<button onclick="createInput()" class="btn btn-primary">Create Input</button>
+			<button onclick="createInputWithLabel()" class="btn btn-primary">Create Input with Label</button>
+			<button onclick="createLabel()" class="btn btn-primary">Create Label</button>
+			<button onclick="clearElements()" class="btn btn-danger" style="margin-top:5px">Clear Elements</button>
+			
+		</div>
+	</div>
+</div>
+
+
+
+  <script>
+    
+	
+	const createButtonElement = document.getElementById('createButtonElement');
+	createButtonElement.addEventListener("click", createButtonElementAction);
+	
+	const createButtonElementIcon = document.getElementById('createButtonElementWithIcon');
+	createButtonElementIcon.addEventListener("click", createButtonElementWithIconAction);
+	
+	function createInputWithLabel() {
+		let inputWidth = prompt('Enter width: Example 50');
+		let placeholder = prompt('Enter Placeholder');
+		let labelText = prompt('Enter Label Text');
+		
+		var div = document.createElement('div');
+	
+		div.className = 'ui-widget-content draggable myDisplay';
+		
+		var innerDiv = document.createElement('div')
+		innerDiv.style.display = 'inline';
+		innerDiv.style.padding = '20px'
+		
+		var innerInput = document.createElement('input')
+		innerInput.className = 'form-control'
+		innerInput.style.width = `${inputWidth}%`
+		innerInput.style.margin = '10px'
+		innerInput.style.display = 'inline'
+		innerInput.setAttribute('placeholder',placeholder)
+		
+		var innerLabel = document.createElement('label')
+		innerLabel.innerHTML = labelText;
+		innerLabel.style.marginLeft = "10px"
+		innerLabel.style.display = 'block'
+		
+		innerDiv.appendChild(innerLabel);
+		innerDiv.appendChild(innerInput);
+		div.appendChild(innerDiv)
+		document.body.appendChild(div);
+		
+		$( ".draggable" ).draggable();
+	}
+	
+	function createLabel() {
+		let labelText = prompt('Enter Label Text');
+		
+		var div = document.createElement('div');
+	
+		div.className = 'ui-widget-content draggable myDisplay';
+		
+		var innerDiv = document.createElement('div')
+		innerDiv.style.display = 'inline';
+		innerDiv.style.padding = '20px'
+		
+		
+		var innerLabel = document.createElement('label')
+		innerLabel.innerHTML = labelText;
+		
+		innerDiv.appendChild(innerLabel);
+		div.appendChild(innerDiv)
+		document.body.appendChild(div);
+		
+		$( ".draggable" ).draggable();
+	}
+	
+	function createInput() {
+		let inputWidth = prompt('Enter width: Example 50');
+		let placeholder = prompt('Enter Placeholder');
+		
+		var div = document.createElement('div');
+	
+		div.className = 'ui-widget-content draggable myDisplay';
+		
+		var innerDiv = document.createElement('div')
+		innerDiv.style.display = 'inline';
+		innerDiv.style.padding = '20px'
+		
+		var innerInput = document.createElement('input')
+		innerInput.className = 'form-control'
+		innerInput.style.width = `${inputWidth}%`
+		innerInput.style.margin = '10px'
+		innerInput.style.display = 'inline'
+		innerInput.setAttribute('placeholder',placeholder)
+		
+		
+		innerDiv.appendChild(innerInput);
+		div.appendChild(innerDiv)
+		document.body.appendChild(div);
+		
+		$( ".draggable" ).draggable();
+	}
+	
+	function createButtonElementAction() 
+	{
+		let buttonColor = prompt('Enter the color you would like example: green,blue,red');
+		let colorClass = '';
+		if (buttonColor == 'green' || buttonColor == 'Green') 
+				colorClass = 'btn btn-success'
+		else if (buttonColor == 'blue' || buttonColor == 'Blue') 
+			colorClass = 'btn btn-primary'
+		else if (buttonColor == 'Red' || buttonColor == 'red')
+			colorClass = 'btn btn-danger'
+		
+		var div = document.createElement('div');
+		div.className = 'ui-widget-content draggable';
+		
+		var innerDiv = document.createElement('div')
+		innerDiv.style.display = 'inline';
+		innerDiv.style.padding = '20px'
+		
+		var innerButton = document.createElement('button')
+		innerButton.className = colorClass
+		
+		var innerSpan = document.createElement('span')
+		innerSpan.innerText = 'Element Name'
+		innerSpan.setAttribute('contenteditable','true')
+		
+		innerButton.appendChild(innerSpan)
+		innerDiv.appendChild(innerButton);
+		div.appendChild(innerDiv)
+		document.body.appendChild(div);
+		
+		
+		$( ".draggable" ).draggable();
+		$( ".ui-widget-content" ).addClass('myDisplay');
+	}
+	
+	function createButtonElementWithIconAction() 
+	{
+		let buttonColor = prompt('Enter the color you would like example: green,blue,red');
+		let colorClass = '';
+		if (buttonColor == 'green' || buttonColor == 'Green') 
+				colorClass = 'btn btn-success'
+		else if (buttonColor == 'blue' || buttonColor == 'Blue') 
+			colorClass = 'btn btn-primary'
+		else if (buttonColor == 'Red' || buttonColor == 'red')
+			colorClass = 'btn btn-danger'
+		let userIcon = prompt('Enter Your Icon Example: fa-solid fa-cloud-arrow-down');
+		
+		
+		var div = document.createElement('div');
+	
+		div.className = 'ui-widget-content draggable myDisplay';
+		
+		var innerDiv = document.createElement('div')
+		innerDiv.style.display = 'inline';
+		innerDiv.style.padding = '20px'
+		
+		var innerButton = document.createElement('button')
+		innerButton.className = colorClass
+		
+		var innerSpan = document.createElement('span')
+		innerSpan.innerText = ' Element Name'
+		innerSpan.setAttribute('contenteditable','true')
+		
+		var icon = document.createElement('i');
+		icon.className = userIcon;
+		innerButton.appendChild(icon);
+		innerButton.appendChild(innerSpan)
+		innerDiv.appendChild(innerButton);
+		div.appendChild(innerDiv)
+		document.body.appendChild(div);
+		
+		$( ".draggable" ).draggable();
+	}
+	
+	function clearElements() {
+		$('.ui-widget-content').remove().detach()
+	}
+	
+	function deleteElement() {
+	
+	}
+	
+	function hideSection() {
+		
+		if ($('#buttonSection').css('visibility') == 'hidden') {
+			$('#hideButton').text('Hide Create Section');
+			$('#buttonSection').css('visibility', '')
+		} else {
+			$('#hideButton').text('Show Create Section');
+			$('#buttonSection').css('visibility', 'hidden')
+		}
+	}
+	
+  $( function() {
+    $( ".draggable" ).draggable();
+	});
+    
+  </script>
+</body>
+
+</html>
